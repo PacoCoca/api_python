@@ -7,6 +7,20 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def login(email, password):
+    """ Gives the user a JWT to access the data
+
+    Parameters
+    ----------
+    email - str
+        The email of the user
+    password - str
+        The password of the user
+
+    Returns
+    -------
+    str
+        An error code if an error occurs, or the JWT otherwise
+    """
     db = get_db()
 
     user = db.execute(

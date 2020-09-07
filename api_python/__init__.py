@@ -1,9 +1,9 @@
+from api_python.database import db
+from api_python.routes import auth
+
 from werkzeug.exceptions import HTTPException
 import os
 from flask import Flask, json
-
-from api_python.database import db
-from api_python.routes import auth
 
 
 def create_app(test_config=None):

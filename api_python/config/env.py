@@ -1,3 +1,7 @@
+"""
+It loads the enviroment variables in a dictionary named env
+"""
+
 import os
 from dotenv import load_dotenv
 

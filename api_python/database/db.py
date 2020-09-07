@@ -10,7 +10,7 @@ def get_db():
     Returns
     -------
     connection
-
+        The connection with the database
     """
     if 'db' not in g:
         g.db = sqlite3.connect(
