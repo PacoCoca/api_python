@@ -3,6 +3,7 @@ from api_python.config.env import env
 
 import time
 import jwt
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def login(email, password):
@@ -18,7 +19,7 @@ def login(email, password):
     # issued time of the token
     iat = time.time()
     db.execute(
-        'UPDATE user SET iat=FROM_UNIXTIME(?) WHERE email=?', (iat, email)
+        'UPDATE user SET iat=? WHERE email=?', (iat, email)
     )
     db.commit()
 

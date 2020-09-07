@@ -1,7 +1,5 @@
 from api_python.services import auth
 
-
-from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import Unauthorized
 import functools
 from flask import Blueprint, g, request, make_response
