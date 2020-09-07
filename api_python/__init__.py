@@ -1,6 +1,9 @@
 from werkzeug.exceptions import HTTPException
 import os
-from flask import Flask
+from flask import Flask, json
+
+from api_python.database import db
+from api_python.routes import auth
 
 
 def create_app(test_config=None):
@@ -41,15 +44,10 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
     # init db
-    from api_python.database import db
     db.init_app(app)
 
     # Register blueprints
-    from api_python.routes import auth
     app.register_blueprint(auth.bp)
-
-    from flask import json
-
 
     @app.errorhandler(HTTPException)
     def handle_exception(e):
