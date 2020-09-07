@@ -1,3 +1,4 @@
+from werkzeug.exceptions import HTTPException
 import os
 from flask import Flask
 
@@ -34,12 +35,34 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
+    # test api
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
 
-    from . import db
+    # init db
+    from api_python.database import db
     db.init_app(app)
+
+    # Register blueprints
+    from api_python.routes import auth
+    app.register_blueprint(auth.bp)
+
+    from flask import json
+
+
+    @app.errorhandler(HTTPException)
+    def handle_exception(e):
+        """Return JSON for HTTP errors."""
+        # start with the correct headers and status code from the error
+        response = e.get_response()
+        # replace the body with JSON
+        response.data = json.dumps({
+            "code": e.code,
+            "name": e.name,
+            "description": e.description,
+        })
+        response.content_type = "application/json"
+        return response
 
     return app
