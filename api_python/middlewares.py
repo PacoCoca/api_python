@@ -1,9 +1,9 @@
-from api_python.services import auth
+from api_python.services import auth, user
 
 import functools
 from werkzeug.exceptions import Unauthorized
 from jwt import InvalidSignatureError
-from flask import Blueprint, g, request, make_response
+from flask import g, request
 
 
 def is_logged(f):
@@ -31,5 +31,28 @@ def is_logged(f):
             # If the JWT is invalid or the Authorization header is not provided,
             # just send Unuathorized response
             raise Unauthorized()
+
+    return wrapped
+
+
+def user_data(f):
+    """Saves the user data in g
+
+    Parameters
+    ----------
+    f : function
+        The function that need the user data
+
+    Returns
+    -------
+    function
+        The same function but first it attaches the user data to g
+    """
+    @functools.wraps(f)
+    def wrapped(**kwargs):
+        token = request.headers['Authorization'].split(' ')[1]
+        g.user = user.user_data(token)
+
+        return f(**kwargs)
 
     return wrapped
