@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def login(email, password):
-    """ Gives the user a JWT to access the data
+    """Gives the user a JWT to access the data
 
     Parameters
     ----------
@@ -44,3 +44,27 @@ def login(email, password):
     token = jwt.encode(payload, env['auth']['key'], algorithm='HS256')
 
     return token
+
+
+def check_token(token):
+    """Checks if a given token is valid
+
+    Parameters
+    ----------
+    token - str
+        The token to verify
+
+    Returns
+    -------
+    bool
+        True if it's valid, False if it isn't
+    """
+    decoded = jwt.decode(token, env['auth']['key'])
+    email, iat = decoded['email'], decoded['iat']
+    db = get_db()
+
+    user = db.execute(
+        'SELECT `id` FROM `user` WHERE `email`=? AND `iat`=?', (email, iat)
+    ).fetchone()
+
+    return user is not None

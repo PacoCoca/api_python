@@ -1,7 +1,6 @@
 from api_python.services import auth
 
 from werkzeug.exceptions import Unauthorized
-import functools
 from flask import Blueprint, g, request, make_response
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
