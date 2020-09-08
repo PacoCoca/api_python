@@ -1,7 +1,7 @@
 from api_python.database.db import get_db
 from api_python.config.env import env
 
-import time
+from datetime import datetime
 import jwt
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -31,7 +31,7 @@ def login(email, password):
         return 'Wrong Credentials'
 
     # issued time of the token
-    iat = time.time()
+    iat = datetime.utcnow().replace(microsecond=0)
     db.execute(
         'UPDATE user SET iat=? WHERE email=?', (iat, email)
     )
@@ -60,7 +60,7 @@ def check_token(token):
         True if it's valid, False if it isn't
     """
     decoded = jwt.decode(token, env['auth']['key'])
-    email, iat = decoded['email'], decoded['iat']
+    email, iat = decoded['email'], datetime.utcfromtimestamp(decoded['iat'])
     db = get_db()
 
     user = db.execute(
