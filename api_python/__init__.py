@@ -1,5 +1,5 @@
 from api_python.database import db
-from api_python.routes import auth, public
+from api_python.routes import auth, public, private
 
 from werkzeug.exceptions import HTTPException
 import os
@@ -49,6 +49,7 @@ def create_app(test_config=None):
     # Register blueprints
     app.register_blueprint(auth.bp)
     app.register_blueprint(public.bp)
+    app.register_blueprint(private.bp)
 
     @app.errorhandler(HTTPException)
     def handle_exception(e):
