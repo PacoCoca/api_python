@@ -5,7 +5,9 @@ from flask.cli import with_appcontext
 
 
 def get_db():
-    """Creates the connection with the database if doesn't exist and returns it
+    """
+    Create the connection with the database if doesn't exist
+    in the current request and return it
 
     Returns
     -------
@@ -23,8 +25,7 @@ def get_db():
 
 
 def close_db(e=None):
-    """Closes the database connection
-    """
+    """Close the database connection"""
     db = g.pop('db', None)
 
     if db is not None:
@@ -34,16 +35,19 @@ def close_db(e=None):
 def init_app(app):
     """
     Make sure the connection is closed after the request is finished
-    and add a command to create the db. 
-    Must be called when creating the app
+    and add a command to create the db.
+
+    Parameters
+    ----------
+    app : Flask
+        The Flask app in which makes the changes
     """
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
 
 
 def init_db():
-    """Creates the database schema
-    """
+    """Create the database schema"""
     db = get_db()
 
     with current_app.open_resource('database/schema.sql') as f:
@@ -53,7 +57,6 @@ def init_db():
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
-    """Clear the existing data and create new tables.
-    """
+    """Clear the existing data and create new tables."""
     init_db()
     click.echo('Initialized the database.')

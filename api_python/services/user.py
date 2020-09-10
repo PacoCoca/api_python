@@ -5,6 +5,19 @@ import jwt
 
 
 def user_data(token):
+    """
+    Get the data of the user identified by a token
+
+    Parameters
+    ----------
+    token : JWT
+        The token with the user credentials
+    
+    Returns
+    -------
+    dict
+        A dict with the user info
+    """
     decoded = jwt.decode(token, env['auth']['key'])
     email, iat = decoded['email'], decoded['iat']
 

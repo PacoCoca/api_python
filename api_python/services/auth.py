@@ -7,13 +7,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def login(email, password):
-    """Gives the user a JWT to access the data
+    """Give the user a JWT to access the data
 
     Parameters
     ----------
-    email - str
+    email : str
         The email of the user
-    password - str
+    password : str
         The password of the user
 
     Returns
@@ -47,17 +47,17 @@ def login(email, password):
 
 
 def check_token(token):
-    """Checks if a given token is valid
+    """Check if a given token is valid
 
     Parameters
     ----------
-    token - str
+    token : str
         The token to verify
 
     Returns
     -------
     bool
-        True if it's valid, False if it isn't
+        True if it is valid, False if it is not
     """
     decoded = jwt.decode(token, env['auth']['key'])
     email, iat = decoded['email'], datetime.utcfromtimestamp(decoded['iat'])

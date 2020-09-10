@@ -1,5 +1,5 @@
 """
-It loads the enviroment variables in a dictionary named env
+Load the enviroment variables in a dictionary named env
 """
 
 import os
@@ -9,6 +9,6 @@ load_dotenv()
 
 env = {
     'auth': {
-    'key': os.getenv('AUTH_KEY'),
-  },
+        'key': os.getenv('AUTH_KEY'),
+    },
 }

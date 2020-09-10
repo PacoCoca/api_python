@@ -7,7 +7,8 @@ from flask import g, request
 
 
 def is_logged(f):
-    """Check if the user is providing a valid token
+    """
+    Check if the user is providing a valid token
 
     Parameters
     ----------
@@ -18,6 +19,11 @@ def is_logged(f):
     -------
     function
         The same function but asserting the token is valid
+
+    Raises
+    ------
+    Unauthorized
+        The token is not valid or it is not in the request headers
     """
     @functools.wraps(f)
     def wrapped(**kwargs):
@@ -36,7 +42,8 @@ def is_logged(f):
 
 
 def user_data(f):
-    """Saves the user data in g
+    """
+    Save the user data in g
 
     Parameters
     ----------
@@ -46,7 +53,7 @@ def user_data(f):
     Returns
     -------
     function
-        The same function but first it attaches the user data to g
+        The same function but first it attaches the user data to g (Global object to the request)
     """
     @functools.wraps(f)
     def wrapped(**kwargs):

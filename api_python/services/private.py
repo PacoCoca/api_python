@@ -1,12 +1,13 @@
 from api_python.database.db import get_db
 
 
-def read(private_id):
-    """Reads private resource identified by private_id, or all of them if not specified
+def read(private_id=None):
+    """
+    Read the private resource identified by private_id, or all of them if not specified
 
     Parameters
     ----------
-    private_id - int
+    private_id : int, optional
         The id of the private resource
 
     Returns
@@ -28,7 +29,8 @@ def read(private_id):
 
 
 def create(field1=None, field2=None):
-    """Creates a private resource, at least 1 parameter must be passed
+    """
+    Create a private resource, at least 1 parameter must be passed
 
     Parameters
     ----------
@@ -38,7 +40,7 @@ def create(field1=None, field2=None):
     Returns
     -------
     str
-        string indicating the result of the operation
+        string indicating the operation result
     """
     if field1 is None and field2 is None:
         return 'Bad Request'
@@ -53,7 +55,8 @@ def create(field1=None, field2=None):
 
 
 def update(private_id, field1=None, field2=None):
-    """Updates the private resource identified by private_id, 
+    """
+    Update the private resource identified by private_id, 
     at least 1 more parameter must be passed
 
     Parameters
@@ -65,7 +68,7 @@ def update(private_id, field1=None, field2=None):
     Returns
     -------
     str
-        string indicating the result of the operation
+        string indicating the operation result
     """
     if field1 is None and field2 is None:
         return 'Bad Request'
@@ -81,7 +84,8 @@ def update(private_id, field1=None, field2=None):
 
 
 def delete(private_id):
-    """Deletes the private resource identified by private_id
+    """
+    Delete the private resource identified by private_id
 
     Parameters
     ----------
@@ -90,7 +94,7 @@ def delete(private_id):
     Returns
     -------
     str
-        string indicating the result of the operation
+        string indicating the operation result
     """
     db = get_db()
     db.execute(
