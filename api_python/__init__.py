@@ -38,11 +38,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # test api
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-
     # init db
     db.init_app(app)
 
