@@ -2,7 +2,7 @@ from api_python.services import auth, user
 
 import functools
 from werkzeug.exceptions import Unauthorized
-from jwt import InvalidSignatureError
+from jwt import PyJWTError
 from flask import g, request
 
 
@@ -33,7 +33,7 @@ def is_logged(f):
             if not auth.check_token(token):
                 raise Unauthorized()
             return f(**kwargs)
-        except (InvalidSignatureError, KeyError):
+        except (PyJWTError, KeyError):
             # If the JWT is invalid or the Authorization header is not provided,
             # just send Unuathorized response
             raise Unauthorized()
