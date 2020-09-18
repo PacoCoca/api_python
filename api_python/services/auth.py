@@ -3,7 +3,7 @@ from api_python.config.env import env
 
 from datetime import datetime
 import jwt
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 
 
 def login(email, password):

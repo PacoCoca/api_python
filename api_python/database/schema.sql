@@ -6,10 +6,8 @@ CREATE TABLE `user` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `email` TEXT UNIQUE NOT NULL,
   `password` TEXT NOT NULL,
-  `name` TEXT,
   `type` TEXT  CHECK(`type` IN ('user', 'admin')) NOT NULL DEFAULT 'user',
-  `iat` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `passwordToken` VARCHAR(16) DEFAULT ''
+  `iat` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'
 );
 
 CREATE TABLE `public` (

@@ -44,6 +44,7 @@ def init_app(app):
     """
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(add_user_command)
 
 
 def init_db():
@@ -57,6 +58,18 @@ def init_db():
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
-    """Clear the existing data and create new tables."""
+    """Clear the existing data and create new tables"""
     init_db()
     click.echo('Initialized the database.')
+
+
+@click.command('add-user')
+@click.argument('email')
+@click.argument('password')
+@click.argument('user_type')
+@with_appcontext
+def add_user_command(email, password, user_type):
+    """Create a new user"""
+    from api_python.services import user
+    user.create(email, password, user_type)
+    click.echo('User added')
