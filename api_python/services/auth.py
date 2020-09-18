@@ -59,7 +59,7 @@ def check_token(token):
     bool
         True if it is valid, False if it is not
     """
-    decoded = jwt.decode(token, env['auth']['key'])
+    decoded = jwt.decode(token, env['auth']['key'], algorithms=['HS256'])
     email, iat = decoded['email'], datetime.utcfromtimestamp(decoded['iat'])
     db = get_db()
 
