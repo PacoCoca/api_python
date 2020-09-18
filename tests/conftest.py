@@ -36,3 +36,25 @@ def client(app):
 @pytest.fixture
 def runner(app):
     return app.test_cli_runner()
+
+
+class AuthActions(object):
+    """
+    Class to log in without using too much boilerplate.
+    This class is useful since many methods require to be logged
+    """
+
+    def __init__(self, client):
+        self._client = client
+
+    def login(self, email='foo@foo.foo', password='bar'):
+        response = self._client.post(
+            '/auth/login',
+            json={'email': email, 'password': password}
+        )
+        return response.get_data().decode('utf-8') if response.status_code is 200 else ''
+
+
+@pytest.fixture
+def auth(client):
+    return AuthActions(client)
