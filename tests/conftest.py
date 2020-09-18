@@ -52,7 +52,7 @@ class AuthActions(object):
             '/auth/login',
             json={'email': email, 'password': password}
         )
-        return response.get_data().decode('utf-8') if response.status_code is 200 else ''
+        return response.get_data().decode('utf-8') if response.status_code == 200 else ''
 
 
 @pytest.fixture
