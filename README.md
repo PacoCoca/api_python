@@ -29,13 +29,18 @@ flask add-user EMAIL PASSWORD USER_TYPE
 ```
 Where the type of user can be 'user' or 'admin'
 
+Necessary variables to run the application
+```
+source init
+```
+
 Now you just have to run the application with
 ```
 flask run
 ```
 And the application will be running in port 5000
 
-__Note:__ each time you want to run the application you need to activate the virtual enviroment, and run the 'flask run' command, the other steps are not necessary
+__Note:__ each time you want to run the application you need to activate the virtual enviroment, and run the 'source init' and 'flask run' command, the other steps are not necessary
 
 
 ## Application
