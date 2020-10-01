@@ -8,5 +8,9 @@ setup(
     zip_safe=True,
     install_requires=[
         'flask',
+        'python-dotenv',
+        'click',
+        'PyJWT',
+        'pytest',
     ],
 )
