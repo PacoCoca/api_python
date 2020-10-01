@@ -1,16 +1,14 @@
 /* test users, the password is bar */
-INSERT INTO `user`(`email`, `password`, `name`, `type`)
+INSERT INTO `user`(`email`, `password`, `type`)
   VALUES
   (
     'foo@foo.foo',
     'pbkdf2:sha256:150000$pPvRhOB6$cf2ead387415b8d3484940a81d5819460bff0ca8506c4211bd0e1f2dc72003e1',
-    'admin',
     'admin'
   ),
   (
     'foo2@foo.foo',
     'pbkdf2:sha256:150000$pPvRhOB6$cf2ead387415b8d3484940a81d5819460bff0ca8506c4211bd0e1f2dc72003e1',
-    'user',
     'user'
   );
 
