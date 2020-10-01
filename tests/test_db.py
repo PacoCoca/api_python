@@ -5,8 +5,6 @@ import pytest
 
 
 def test_get_db(app):
-    """
-    """
     # Assert the connection is the same within the same request context
     with app.app_context():
         conn = get_db()
@@ -19,8 +17,6 @@ def test_get_db(app):
 
 
 def test_init_db_command(runner, monkeypatch):
-    """
-    """
     class Recorder():
         called = False
 
@@ -31,3 +27,8 @@ def test_init_db_command(runner, monkeypatch):
     result = runner.invoke(args=['init-db'])
     assert 'Initialized' in result.output
     assert Recorder.called
+
+
+def test_add_user_command(runner):
+    result = runner.invoke(args=['add-user', 'example@ex.ex', '1234', 'user'])
+    assert 'added' in result.output
