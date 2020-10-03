@@ -60,13 +60,13 @@ Credentials needed for each request are:
 This app uses JWT (more info in https://jwt.io/) for authorization, to get the token you will need to log in sending a POST request to 'auth/login' with the body (you need to indicate the body is a json in the header too)
 ```json
 {
-	"email": email,
-	"password": password
+	"email": "email",
+	"password": "password"
 }
 ```
 This will give you the token which provides your credentials, you have to add it in the header of the requests like
 ```json
 {
-	"Authorization": "Bearer " + JWT
+	"Authorization": "Bearer JWT"
 }
 ```
